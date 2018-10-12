@@ -8,8 +8,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define MAXLINE 4096
+
+int my_system (const char *command);
 
 int Socket(int family, int type, int flags);
 
@@ -60,7 +67,7 @@ int main(int argc, char **argv) {
 
    printf("IP e Porta Servidor: %s:%u\n\n", ipserv, portserv);
    for(;;){
-     
+
      for (int i=0; i<MAXLINE;i++){
        recvline[i] = '\0';
      }
@@ -71,7 +78,8 @@ int main(int argc, char **argv) {
        Write(sockfd, recvline, strlen(recvline));
        break;
      }
-     if (system(recvline) != 0){
+
+     if (my_system(recvline) != 0){
        Write(sockfd, sys_erro, strlen(sys_erro));
      }else
        Write(sockfd, recvline, strlen(recvline));
@@ -79,6 +87,26 @@ int main(int argc, char **argv) {
    Close(sockfd);
 
    exit(0);
+}
+
+
+#define SHELL "/bin/sh"
+
+int my_system (const char *command){
+  int status = 0;
+  pid_t pid;
+
+  pid = fork ();
+  if (pid == 0){
+      execl (SHELL, SHELL, "-c", command, NULL);
+      _exit (EXIT_FAILURE);
+    }
+  else if (pid < 0)
+    status = -1;
+  else
+    if (waitpid (pid, &status, 0) != pid)
+      status = -1;
+  return status;
 }
 
 int Socket(int family, int type, int flags){

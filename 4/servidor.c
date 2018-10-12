@@ -41,7 +41,7 @@ int main (int argc, char **argv) {
    int portcli, portserv;
    char ipcli[INET6_ADDRSTRLEN], ipserv[INET6_ADDRSTRLEN];
 
-   char cmd[MAXLINE + 1];
+   char cmd[MAXLINE + 1], input[MAXLINE + 1];
    char recvline[MAXLINE + 1];
 
    char logc[MAXLINE + 1];
@@ -60,7 +60,7 @@ int main (int argc, char **argv) {
    for ( ; ; ) {
  		clilen = sizeof(cliaddr);
  		connfd = Accept(listenfd, (struct sockaddr *)&cliaddr, &clilen);
-    printf("Passou do Accept\n");
+
  		if ( (childpid = Fork()) == 0) {	/* child process */
  			Close(listenfd);	/* close listening socket */
 
