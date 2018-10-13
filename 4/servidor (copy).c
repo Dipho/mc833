@@ -73,9 +73,8 @@ int main (int argc, char **argv) {
       sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u conectou-se >> log.txt", ipcli, portcli);
       system(logc);
 
-      sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u conectou-se", ipcli, portcli);
-      system(logc);
-      //printf("\nIP e Porta Cliente: %s:%u\n", ipcli, portcli);
+
+      printf("\nIP e Porta Cliente: %s:%u\n", ipcli, portcli);
 
       /*Obtem o endereço e a porta do servidor*/
       Inet_ntop(AF_INET, &servaddr.sin_addr, ipserv, sizeof(ipserv));
@@ -93,14 +92,14 @@ int main (int argc, char **argv) {
           recvline[i] = '\0';
         }
         Read(connfd, recvline, MAXLINE);
-        printf("Resposta do cliente com IP %s e Porta %u:\n%s", ipcli, portcli, recvline);
+        printf("Resposta do cliente %s: %s", ipcli, recvline);
 
         /*Log de comando do cliente*/
-        recvlen = strlen(cmd);
-        cmd[recvlen-1] = '\0';
-        sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u executou o comando %s >> log.txt", ipcli, portcli, cmd);
+        recvlen = strlen(recvline);
+        recvline[recvlen-1] = '\0';
+        sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u executou o comando : %s >> log.txt", ipcli, portcli, recvline);
         system(logc);
-        if(strcmp(cmd, "exit") == 0)
+        if(strcmp(cmd, "exit\n") == 0)
           break;
       }
       //Read(connfd, recvline, MAXLINE);
@@ -108,9 +107,6 @@ int main (int argc, char **argv) {
 
       /*Log de desconexao do cliente*/
       sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u desconectou-se >> log.txt", ipcli, portcli);
-      system(logc);
-
-      sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u desconectou-se", ipcli, portcli);
       system(logc);
 
  			exit(0);

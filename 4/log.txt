@@ -266,3 +266,131 @@ sex out 12 01:20:01 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60034 executou o
 sex out 12 01:20:01 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60034 executou o comando : ls
 sex out 12 01:20:04 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60034 executou o comando : exit
 sex out 12 01:20:04 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60034 desconectou-se
+sex out 12 16:05:11 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41268 conectou-se
+sex out 12 16:05:15 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41268 executou o comando : ls
+sex out 12 16:05:18 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41268 executou o comando : exit
+sex out 12 16:05:18 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41268 desconectou-se
+sex out 12 16:12:09 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41324 conectou-se
+sex out 12 16:12:12 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41324 executou o comando : ls
+sex out 12 16:12:56 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41324 executou o comando : exit
+sex out 12 16:12:56 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41324 desconectou-se
+sex out 12 16:29:48 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41786 conectou-se
+sex out 12 16:29:51 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41786 executou o comando : ls
+sex out 12 16:39:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41786 executou o comando : exit
+sex out 12 16:39:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41786 desconectou-se
+sex out 12 16:40:39 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41922 conectou-se
+sex out 12 16:40:42 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41922 executou o comando : ls
+sex out 12 16:40:58 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41922 executou o comando : Comando inválido
+sex out 12 16:40:59 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41922 executou o comando : exit
+sex out 12 16:40:59 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41922 desconectou-se
+sex out 12 16:42:18 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41938 conectou-se
+sex out 12 16:42:20 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41938 executou o comando : ls
+sex out 12 16:42:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41938 executou o comando : exit
+sex out 12 16:42:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 41938 desconectou-se
+sex out 12 17:07:01 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42302 conectou-se
+sex out 12 17:07:03 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42302 executou o comando : ls
+sex out 12 17:07:42 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42304 conectou-se
+sex out 12 17:07:44 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42304 executou o comando : ls
+sex out 12 17:08:08 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42304 executou o comando : exit
+sex out 12 17:08:08 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42304 desconectou-se
+sex out 12 17:08:19 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42306 conectou-se
+sex out 12 17:08:21 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42306 executou o comando : ls
+sex out 12 17:08:41 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42306 executou o comando : exit
+sex out 12 17:08:41 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42306 desconectou-se
+sex out 12 17:08:46 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42314 conectou-se
+sex out 12 17:09:04 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42314 executou o comando : ls
+sex out 12 17:12:17 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42314 executou o comando :
+sex out 12 17:12:17 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42314 desconectou-se
+sex out 12 17:12:24 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42384 conectou-se
+sex out 12 17:12:26 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42384 executou o comando : ls
+sex out 12 17:13:17 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42384 executou o comando : exit
+sex out 12 17:13:17 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42384 desconectou-se
+sex out 12 17:13:29 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42400 conectou-se
+sex out 12 17:13:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42400 executou o comando : ls
+sex out 12 17:34:25 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42400 executou o comando : exit
+sex out 12 17:34:25 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42400 desconectou-se
+sex out 12 17:34:36 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42706 conectou-se
+sex out 12 17:34:39 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42706 executou o comando : ls
+sex out 12 17:34:56 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42706 executou o comando : exit
+sex out 12 17:34:56 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42706 desconectou-se
+sex out 12 17:35:01 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42710 conectou-se
+sex out 12 17:35:02 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42710 executou o comando : ls
+sex out 12 17:35:29 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42710 executou o comando : exit
+sex out 12 17:35:29 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42710 desconectou-se
+sex out 12 17:35:37 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42712 conectou-se
+sex out 12 17:35:39 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42712 executou o comando : Comando inválido
+sex out 12 17:35:46 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42712 executou o comando : ls
+sex out 12 17:35:57 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42712 executou o comando : ls
+sex out 12 22:01:27 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42712 executou o comando : exit
+sex out 12 22:01:27 -03 2018 : Cliente com IP 127.0.0.1 e Porta 42712 desconectou-se
+sáb out 13 13:05:45 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43968 conectou-se
+sáb out 13 13:05:48 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43968 executou o comando : ls
+sáb out 13 13:06:27 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43968 executou o comando : exit
+sáb out 13 13:06:27 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43968 desconectou-se
+sáb out 13 13:06:34 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43970 conectou-se
+sáb out 13 13:06:35 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43970 executou o comando : ls
+sáb out 13 13:07:55 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43970 executou o comando : Comando inválido
+sáb out 13 13:07:57 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43970 executou o comando : exit
+sáb out 13 13:07:57 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43970 desconectou-se
+sáb out 13 13:08:11 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43984 conectou-se
+sáb out 13 13:08:13 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43984 executou o comando : ls
+sáb out 13 13:08:58 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43984 executou o comando : exit
+sáb out 13 13:08:58 -03 2018 : Cliente com IP 127.0.0.1 e Porta 43984 desconectou-se
+sáb out 13 13:09:05 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44008 conectou-se
+sáb out 13 13:09:07 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44008 executou o comando : Comando inválido
+sáb out 13 13:11:44 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44008 executou o comando : exit
+sáb out 13 13:11:44 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44008 desconectou-se
+sáb out 13 13:11:53 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44022 conectou-se
+sáb out 13 13:11:57 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44022 executou o comando : ls
+sáb out 13 13:12:14 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44022 executou o comando : exit
+sáb out 13 13:12:14 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44022 desconectou-se
+sáb out 13 13:14:43 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44092 conectou-se
+sáb out 13 13:14:44 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44092 executou o comando : Comando inválido
+sáb out 13 13:16:42 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44092 executou o comando : exit
+sáb out 13 13:16:42 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44092 desconectou-se
+sáb out 13 13:16:59 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44098 conectou-se
+sáb out 13 13:17:01 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44098 executou o comando : ls
+sáb out 13 13:21:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44098 executou o comando : exit
+sáb out 13 13:21:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44098 desconectou-se
+sáb out 13 13:22:34 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44266 conectou-se
+sáb out 13 13:22:36 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44266 executou o comando : Comando inválido
+sáb out 13 13:22:41 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44266 executou o comando : Comando inválido
+sáb out 13 13:24:00 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44268 conectou-se
+sáb out 13 13:24:02 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44268 executou o comando : Comando inválido
+sáb out 13 13:24:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44268 executou o comando : exit
+sáb out 13 13:24:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44268 desconectou-se
+sáb out 13 13:24:41 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44270 conectou-se
+sáb out 13 13:24:42 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44270 executou o comando : Comando inválido
+sáb out 13 13:25:28 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44270 executou o comando : exit
+sáb out 13 13:25:28 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44270 desconectou-se
+sáb out 13 13:25:38 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44280 conectou-se
+sáb out 13 13:25:39 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44280 executou o comando : Comando inválido
+sáb out 13 13:28:25 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44294 conectou-se
+sáb out 13 13:29:11 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44300 conectou-se
+sáb out 13 13:29:12 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44300 executou o comando : Comando inválido
+sáb out 13 13:29:58 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44300 executou o comando : exit
+sáb out 13 13:29:58 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44300 desconectou-se
+sáb out 13 13:30:04 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44304 conectou-se
+sáb out 13 13:30:05 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44304 executou o comando : Comando inválido
+sáb out 13 13:30:10 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44304 executou o comando : ls
+sáb out 13 13:31:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60980 conectou-se
+sáb out 13 13:31:26 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60980 executou o comando : ls
+sáb out 13 13:31:28 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60980 executou o comando : exit
+sáb out 13 13:31:28 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60980 desconectou-se
+sáb out 13 13:33:53 -03 2018 : Cliente com IP 127.0.0.1 e Porta 60986 conectou-se
+sáb out 13 13:35:10 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44324 conectou-se
+sáb out 13 13:36:21 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44324 executou o comando : Comando inválido
+sáb out 13 14:09:45 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44730 conectou-se
+sáb out 13 14:10:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44730 executou o comando : exit
+sáb out 13 14:10:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44730 desconectou-se
+sáb out 13 14:10:34 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44732 conectou-se
+sáb out 13 17:06:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 44732 desconectou-se
+sáb out 13 17:07:40 -03 2018 : Cliente com IP 127.0.0.1 e Porta 47686 conectou-se
+sáb out 13 17:12:15 -03 2018 : Cliente com IP 127.0.0.1 e Porta 47686 desconectou-se
+sáb out 13 17:14:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 49182 conectou-se
+sáb out 13 17:14:46 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37704 conectou-se
+sáb out 13 17:15:44 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37704 desconectou-se
+sáb out 13 17:15:59 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37976 conectou-se
+sáb out 13 17:16:01 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37976 executou o comando ls
+sáb out 13 17:16:04 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37976 executou o comando exit
+sáb out 13 17:16:04 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37976 desconectou-se

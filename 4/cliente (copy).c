@@ -16,7 +16,7 @@
 
 #define MAXLINE 4096
 
-int my_system (const char *command, int socket);
+int my_system (const char *command);
 
 int Socket(int family, int type, int flags);
 
@@ -42,8 +42,6 @@ int main(int argc, char **argv) {
 
    char recvline[MAXLINE + 1];
    const char sys_erro[] = "Comando inválido\n";
-
-   char logc[MAXLINE + 1];
 
    if (argc != 3) {
       strcpy(error,"uso: ");
@@ -76,18 +74,15 @@ int main(int argc, char **argv) {
 
      Read(sockfd, recvline, MAXLINE);
 
-     sprintf(logc, "echo `date` : O servidor enviou o comando: %s", recvline);
-     system(logc);
-
      if(strcmp(recvline, "exit\n") == 0){
        Write(sockfd, recvline, strlen(recvline));
        break;
      }
 
-     if (my_system(recvline, sockfd) != 0){
+     if (my_system(recvline) != 0){
        Write(sockfd, sys_erro, strlen(sys_erro));
-     }//else
-       // Write(sockfd, recvline, strlen(recvline));
+     }else
+       Write(sockfd, recvline, strlen(recvline));
    }
    Close(sockfd);
 
@@ -97,15 +92,13 @@ int main(int argc, char **argv) {
 
 #define SHELL "/bin/sh"
 
-int my_system (const char *command, int socket){
+int my_system (const char *command){
   int status = 0;
   pid_t pid;
 
   pid = fork ();
   if (pid == 0){
-      dup2(socket, 1);
       execl (SHELL, SHELL, "-c", command, NULL);
-      dup2(1, socket);
       _exit (EXIT_FAILURE);
     }
   else if (pid < 0)
