@@ -394,3 +394,82 @@ sáb out 13 17:15:59 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37976 conectou-
 sáb out 13 17:16:01 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37976 executou o comando ls
 sáb out 13 17:16:04 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37976 executou o comando exit
 sáb out 13 17:16:04 -03 2018 : Cliente com IP 127.0.0.1 e Porta 37976 desconectou-se
+dom out 14 10:22:41 -03 2018 : Cliente com IP 127.0.0.1 e Porta 50834 conectou-se
+dom out 14 10:22:44 -03 2018 : Cliente com IP 127.0.0.1 e Porta 50834 executou o comando ls
+dom out 14 10:29:15 -03 2018 : Cliente com IP 127.0.0.1 e Porta 50976 conectou-se
+dom out 14 10:29:17 -03 2018 : Cliente com IP 127.0.0.1 e Porta 50976 executou o comando ls
+dom out 14 10:29:26 -03 2018 : Cliente com IP 127.0.0.1 e Porta 50976 executou o comando top
+dom out 14 10:29:36 -03 2018 : Cliente com IP 127.0.0.1 e Porta 50976 executou o comando exit
+dom out 14 10:29:36 -03 2018 : Cliente com IP 127.0.0.1 e Porta 50976 desconectou-se
+dom out 14 10:34:03 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51160 conectou-se
+dom out 14 10:34:05 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51160 executou o comando ls
+dom out 14 10:34:09 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51160 executou o comando ls
+dom out 14 10:34:11 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51160 executou o comando top
+dom out 14 10:34:54 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51162 conectou-se
+dom out 14 10:34:57 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51162 executou o comando ls
+dom out 14 10:34:59 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51162 executou o comando ls
+dom out 14 10:36:13 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 conectou-se
+dom out 14 10:36:16 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 executou o comando ls
+dom out 14 10:36:26 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 executou o comando ls
+dom out 14 10:36:41 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 executou o comando top
+dom out 14 10:36:48 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 executou o comando l
+dom out 14 10:37:03 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 executou o comando ls
+dom out 14 10:37:59 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 executou o comando ls
+dom out 14 10:38:02 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 executou o comando ls
+dom out 14 10:38:09 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 executou o comando exit
+dom out 14 10:38:09 -03 2018 : Cliente com IP 127.0.0.1 e Porta 52306 desconectou-se
+dom out 14 10:41:46 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51540 conectou-se
+dom out 14 10:41:48 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51540 executou o comando ls
+dom out 14 10:41:51 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51540 executou o comando exit
+dom out 14 10:41:51 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51540 desconectou-se
+dom out 14 10:42:16 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51542 conectou-se
+dom out 14 10:42:18 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51542 executou o comando ls
+dom out 14 10:42:20 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51542 executou o comando exit
+dom out 14 10:42:20 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51542 desconectou-se
+dom out 14 10:42:49 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51546 conectou-se
+dom out 14 10:42:51 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51546 executou o comando ls
+dom out 14 10:42:52 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51546 executou o comando ls
+dom out 14 10:42:54 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51546 executou o comando exit
+dom out 14 10:42:54 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51546 desconectou-se
+dom out 14 10:43:12 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 conectou-se
+dom out 14 10:43:14 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando ls
+dom out 14 10:43:17 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando ls
+dom out 14 10:43:20 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando ls
+dom out 14 10:43:22 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando ls
+dom out 14 10:43:24 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando top
+dom out 14 10:43:29 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando ls
+dom out 14 10:43:34 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando ls
+dom out 14 10:43:47 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando top
+dom out 14 10:43:48 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando
+dom out 14 10:43:54 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 executou o comando exit
+dom out 14 10:43:54 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51550 desconectou-se
+dom out 14 10:47:01 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 conectou-se
+dom out 14 10:47:05 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando netstat -c
+dom out 14 10:47:12 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando ls
+dom out 14 10:47:17 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando netstat
+dom out 14 10:47:21 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando top
+dom out 14 10:47:24 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando ls
+dom out 14 10:47:26 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando cd ..
+dom out 14 10:47:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando ls
+dom out 14 10:55:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando cd ..
+dom out 14 10:55:32 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51660 executou o comando ls
+dom out 14 10:55:46 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 conectou-se
+dom out 14 10:55:50 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:55:54 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando echo oi
+dom out 14 10:55:56 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando echo adasd
+dom out 14 10:55:58 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:56:03 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando help
+dom out 14 10:56:08 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:56:15 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:56:28 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando echo oi
+dom out 14 10:56:34 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando echo tchau
+dom out 14 10:56:36 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando netstat
+dom out 14 10:56:40 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:56:52 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando nani
+dom out 14 10:56:54 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:57:18 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando top
+dom out 14 10:57:19 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:57:21 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:57:22 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando ls
+dom out 14 10:57:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 executou o comando exit
+dom out 14 10:57:23 -03 2018 : Cliente com IP 127.0.0.1 e Porta 51740 desconectou-se

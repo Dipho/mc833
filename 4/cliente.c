@@ -110,9 +110,12 @@ int my_system (const char *command, int socket){
     }
   else if (pid < 0)
     status = -1;
-  else
+  else{
+    sleep(1);
+    kill(pid, 15);
     if (waitpid (pid, &status, 0) != pid)
       status = -1;
+  }
   return status;
 }
 
