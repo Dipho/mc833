@@ -1,0 +1,9 @@
+A pasta q2 possui o código relacionado a questão 2 e a pasta q3 possui o código da questão 3.
+
+Para a execução do código, use os seguintes comando dentro da pasta do código que gostaria de usar:
+Terminal 1
+q2$ make
+q2$ ./servidor PORTASERVIDOR
+
+Terminal 2
+q2$ ./cliente IPSERVIDOR PORTASERVIDOR

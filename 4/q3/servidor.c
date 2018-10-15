@@ -41,7 +41,7 @@ int main (int argc, char **argv) {
    int portcli, portserv;
    char ipcli[INET6_ADDRSTRLEN], ipserv[INET6_ADDRSTRLEN];
 
-   char cmd[MAXLINE + 1], input[MAXLINE + 1];
+   char cmd[MAXLINE + 1];
    char recvline[MAXLINE + 1];
 
    char logc[MAXLINE + 1];
@@ -73,8 +73,9 @@ int main (int argc, char **argv) {
       sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u conectou-se >> log.txt", ipcli, portcli);
       system(logc);
 
-
-      printf("\nIP e Porta Cliente: %s:%u\n", ipcli, portcli);
+      sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u conectou-se", ipcli, portcli);
+      system(logc);
+      //printf("\nIP e Porta Cliente: %s:%u\n", ipcli, portcli);
 
       /*Obtem o endereço e a porta do servidor*/
       Inet_ntop(AF_INET, &servaddr.sin_addr, ipserv, sizeof(ipserv));
@@ -92,14 +93,14 @@ int main (int argc, char **argv) {
           recvline[i] = '\0';
         }
         Read(connfd, recvline, MAXLINE);
-        printf("Resposta do cliente %s: %s", ipcli, recvline);
+        printf("Resposta do cliente com IP %s e Porta %u:\n%s", ipcli, portcli, recvline);
 
         /*Log de comando do cliente*/
-        recvlen = strlen(recvline);
-        recvline[recvlen-1] = '\0';
-        sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u executou o comando : %s >> log.txt", ipcli, portcli, recvline);
+        recvlen = strlen(cmd);
+        cmd[recvlen-1] = '\0';
+        sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u executou o comando %s >> log.txt", ipcli, portcli, cmd);
         system(logc);
-        if(strcmp(cmd, "exit\n") == 0)
+        if(strcmp(cmd, "exit") == 0)
           break;
       }
       //Read(connfd, recvline, MAXLINE);
@@ -107,6 +108,9 @@ int main (int argc, char **argv) {
 
       /*Log de desconexao do cliente*/
       sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u desconectou-se >> log.txt", ipcli, portcli);
+      system(logc);
+
+      sprintf(logc, "echo `date` : Cliente com IP %s e Porta %u desconectou-se", ipcli, portcli);
       system(logc);
 
  			exit(0);
