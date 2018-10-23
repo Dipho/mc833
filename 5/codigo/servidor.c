@@ -8,6 +8,7 @@
 #include <time.h>
 #include <strings.h>
 #include <arpa/inet.h>
+#include <sys/wait.h>
 
 #include "basic.h"
 #include "socket_helper.h"
@@ -48,7 +49,6 @@ int main (int argc, char **argv) {
    Bind(listenfd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 
    // Modificação questão 3
-   // Listen(listenfd, LISTENQ);
    backlog = strtol(argv[2], NULL, 10);
    printf("Backlog: %d\n", backlog);
    Listen(listenfd, backlog);
@@ -59,8 +59,8 @@ int main (int argc, char **argv) {
       struct sockaddr_in clientaddr;
       socklen_t clientaddr_len = sizeof(clientaddr);
 
-      //Modificação questao 3
-      sleep(10);
+      //Sleep necessário para questao 3 e 4
+      sleep(100);
       connfd = Accept(listenfd, (struct sockaddr *) &clientaddr, &clientaddr_len);
 
       if((pid = fork()) == 0) {
@@ -71,6 +71,8 @@ int main (int argc, char **argv) {
          Close(connfd);
 
          exit(0);
+      }else{
+        waitpid(-1, NULL, 0);
       }
 
       Close(connfd);
@@ -88,13 +90,17 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
    while ((n = read(connfd, recvline, MAXDATASIZE)) > 0) {
       recvline[n] = 0;
 
+      if(strcmp(recvline, EXIT_COMMAND) == 0) {
+         read(connfd, recvline, MAXDATASIZE);
+         break;
+      }
+
       if (getpeername(connfd, (struct sockaddr *) &clientaddr, &remoteaddr_len) == -1) {
          perror("getpeername() failed");
          return;
       }
 
       //Modificação questao 2
-      // printf("<%s-%d>: %s\n", inet_ntoa(clientaddr.sin_addr),(int) ntohs(clientaddr.sin_port), recvline);
       printf("<%s-%d>\n", inet_ntoa(clientaddr.sin_addr),(int) ntohs(clientaddr.sin_port));
 
       printf("Digite uma mensagem:\n");

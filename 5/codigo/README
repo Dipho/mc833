@@ -1,0 +1,10 @@
+Para a execução do código, use os seguintes comandos dentro da pasta do código que gostaria de usar:
+
+Terminal 1
+$ make
+$ ./servidor PORTASERVIDOR BACKLOG
+
+Terminal 2
+$ ./cliente IPSERVIDOR PORTASERVIDOR
+ou
+$ ./fila.sh PORTASERVIDOR
