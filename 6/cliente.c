@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 }
 
 void str_cli(FILE *fp, int sockfd) {
-	int			maxfdp1, send = 0;
+	int			maxfdp1, send = 0, n;
 	fd_set		rset;
 	char		sendline[MAXLINE], recvline[MAXLINE];
   //int count = 0;
@@ -78,8 +78,9 @@ void str_cli(FILE *fp, int sockfd) {
 
     //Se o socket pode ser lido
 		if (FD_ISSET(sockfd, &rset)) {
-			if (read(sockfd, recvline, MAXLINE) == 0)
+			if ((n = read(sockfd, recvline, MAXLINE)) == 0)
   				perror("str_cli: server terminated prematurely");
+      recvline[n] = 0;
 			//printf("Linha Recebida: %s. Fim da Linha Recebida.\n", recvline);
       fputs(recvline, stdout);
       send = 0;

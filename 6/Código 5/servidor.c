@@ -8,7 +8,6 @@
 #include <time.h>
 #include <strings.h>
 #include <arpa/inet.h>
-#include <sys/wait.h>
 
 #include "basic.h"
 #include "socket_helper.h"
@@ -26,14 +25,10 @@ int main (int argc, char **argv) {
    struct sockaddr_in servaddr;
    char   error[MAXDATASIZE + 1];
 
-   // Modificação questao 3
-   int backlog;
-
-   if (argc != 3) {
+   if (argc != 2) {
       strcpy(error,"uso: ");
       strcat(error,argv[0]);
       strcat(error," <Port>");
-      strcat(error," <backlog>");
       perror(error);
       exit(1);
    }
@@ -48,10 +43,8 @@ int main (int argc, char **argv) {
 
    Bind(listenfd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 
-   // Modificação questão 3
-   backlog = strtol(argv[2], NULL, 10);
-   printf("Backlog: %d\n", backlog);
-   Listen(listenfd, backlog);
+   Listen(listenfd, LISTENQ);
+
 
    for ( ; ; ) {
       pid_t pid;
@@ -59,8 +52,6 @@ int main (int argc, char **argv) {
       struct sockaddr_in clientaddr;
       socklen_t clientaddr_len = sizeof(clientaddr);
 
-      //Sleep necessário para questao 3 e 4
-      //sleep(100);
       connfd = Accept(listenfd, (struct sockaddr *) &clientaddr, &clientaddr_len);
 
       if((pid = fork()) == 0) {
@@ -71,8 +62,6 @@ int main (int argc, char **argv) {
          Close(connfd);
 
          exit(0);
-      }else{
-        waitpid(-1, NULL, 0);
       }
 
       Close(connfd);
@@ -83,7 +72,7 @@ int main (int argc, char **argv) {
 
 void doit(int connfd, struct sockaddr_in clientaddr) {
    char recvline[MAXDATASIZE + 1];
-
+   char   message[MAXDATASIZE + 1];
    int n;
    socklen_t remoteaddr_len = sizeof(clientaddr);
 
@@ -95,7 +84,6 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
          return;
       }
 
-      printf("Linha: %s. Fim da Linha.\n", recvline);
       write(connfd, recvline, strlen(recvline));
 
    }
