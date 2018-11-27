@@ -1,7 +1,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <sys/select.h>
-#include <sys/time.h>	/* timeval{} for select() */
+#include <sys/time.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdio.h>
@@ -20,12 +20,14 @@
 #define MAXLINE 4096
 #define EXIT_COMMAND "exit\n"
 
+enum state { menu, simple_game, carrasco, multiplayer};
+
 void init_scr();
 void game_menu();
-void simple_game();
 void game (int lives, char *word, char *exclude);
 void print_letters(char *exclude);
 void print_spaces(int n);
+void update_used_letters (char new_letter, char *used_letters);
 void str_cli(FILE *fp, int sockfd);
 
 int main(int argc, char **argv) {
@@ -61,6 +63,7 @@ int main(int argc, char **argv) {
    exit(0);
 }
 
+// Imprime a tela inicial do jogo
 void init_scr(){
   int maxX;
   int maxY;
@@ -122,6 +125,7 @@ void init_scr(){
 	return;
 }
 
+// Imprime o menu do jogo
 void game_menu(){
   printf("\nBem vindo ao Jogo da Forca!\n");
   printf("-------\n");
@@ -134,23 +138,21 @@ void game_menu(){
   return;
 }
 
-void simple_game(){
-  printf("\nVocê começou uma partida simples!\n");
-  printf("-------\n");
-
-  return;
-}
-
+// Imprime o core das partidas
 void game (int lives, char *word, char *exclude){
-  printf("\n");
+  printf("----------------------------------------------------------------------\n");
   printf("Vidas: %d\n", lives);
   printf("\n");
   printf("Palavra: %s\n", word);
   printf("\n");
   print_letters(exclude);
+  printf("\n");
+  printf("Digite seu palpite ('exit' para cancelar partida): ");
+  printf("\n");
   return;
 }
 
+// Imprime o alfabeto de letras disponíveis
 void print_letters(char *exclude){
   int e_i = 0;
   int abc_i = 0;
@@ -180,6 +182,8 @@ void print_letters(char *exclude){
 
   return;
 }
+
+// Auxiliar para a função "print_letters"
 void print_spaces(int n){
   for (int i=0; i<n; i++){
     printf(" ");
@@ -187,15 +191,56 @@ void print_spaces(int n){
 
   return;
 }
+
+// Atualiza o array de caracteres utilizados
+void update_used_letters (char new_letter, char *used_letters){
+
+  char aux_letters[26];
+  strcpy(aux_letters, used_letters);
+
+  int i;
+  for (i = 0; i<strlen(aux_letters); i++){
+    if (aux_letters[i] == new_letter){
+      return;
+    }
+    else if (aux_letters[i] > new_letter){
+      used_letters[i] = new_letter;
+      for (int j = i; j<strlen(aux_letters); j++){
+        used_letters[j+1] = aux_letters[j];
+      }
+
+      return;
+    }
+  }
+  used_letters[i+1] = used_letters[i];
+  used_letters[i] = new_letter;
+
+  return;
+}
+
+// Realiza comunicação com o servidor
 void str_cli(FILE *fp, int sockfd) {
+  // Variáveis para comunicação
 	int			maxfdp1, send = 0, n;
 	fd_set		rset;
 	char		sendline[MAXLINE], recvline[MAXLINE] = "MENU";
+
+  // Variáveis da aplicação
+  enum state cur_state = menu;
+
+  int j, lives = -1;
+  char *cli_word;
+  char used_letters[26] = " ";
 
   //Set é zerado
 	FD_ZERO(&rset);
 	for ( ; ; ) {
 
+    /*================================================================================
+
+                                COMUNICAÇÃO COM O SERVIDOR
+
+    ================================================================================*/
     //Bit correspondente à entrada padrão é setado
 		FD_SET(fileno(fp), &rset);
     //Bit correspondente ao socket é setado
@@ -219,7 +264,6 @@ void str_cli(FILE *fp, int sockfd) {
       send = 0;
 		}
 
-
     //ENTRADA PADRÃO
 		if ((FD_ISSET(fileno(fp), &rset)) && (send == 0)) {
       //printf("2\n");
@@ -231,19 +275,76 @@ void str_cli(FILE *fp, int sockfd) {
       }
 		}
 
-    if (!strcmp(recvline, "MENU")){
+
+
+    /*================================================================================
+
+                                APLICAÇÃO DA FORCA
+
+    ================================================================================*/
+    // Modo de Menu
+    if (cur_state == menu){
       init_scr();
       game_menu();
+
+      if (recvline[0] == '1'){
+        printf("\nVocê começou uma partida simples!\n");
+        cur_state = simple_game;
+      }
+      else if (!strcmp(recvline, "CARRASCO")){
+        printf("\nCarrasco a ser implementado\n");
+      }
+      else if (!strcmp(recvline, "MULTIPLAYER")){
+        printf("\nMultiplayer a ser implementado\n");
+      }
     }
-    else if (!strcmp(recvline, "SIMPLE_GAME")){
-      simple_game();
-      game(6, "_ _ _ _ _ _", "AGMPTVWXYZ");
-    }
-    else if (!strcmp(recvline, "CARRASCO")){
-      printf("\nCarrasco a ser implementado\n");
-    }
-    else if (!strcmp(recvline, "MULTIPLAYER")){
-      printf("\nMultiplayer a ser implementado\n");
+
+    // Modo de Simple Game
+    if (cur_state == simple_game){
+
+      // Atualiza a vida local
+      lives = recvline[1] - '0';
+      if (lives == 0){
+        printf("\n\nVocê perdeu! =(\n");
+        strcpy(used_letters, " ");
+        cur_state = menu;
+      }
+      else{
+        // Verifica se é a primeira chamada
+        if (recvline[3] != '0'){
+          // Verifica acertos
+          if (recvline[3] == 'T')
+            printf("\n\nBelo chute!\n");
+          else if (recvline[3] == 'F')
+            printf("\n\nErrouu!\n");
+
+          // Atualiza as letras utilizadas
+          if (used_letters[0] == ' '){
+            used_letters[0] = recvline[2];
+          } else {
+            update_used_letters(recvline[2], used_letters);
+          }
+        }
+
+        // Atualiza a palavra local do cliente
+        cli_word = malloc (strlen(recvline)-4);
+        j=0;
+        for (int i=4; i<strlen(recvline); i++){
+          cli_word[j++]=recvline[i];
+        }
+
+        // Em caso de vitória o jogo é encerrado
+        if (recvline[3] == 'S'){
+          printf("\n\nParabéns, você acertou!\n");
+          printf("\nA palavra era: %s\n", cli_word);
+          printf("\nPressione qualquer tecla para voltar ao menu\n");
+          cur_state = menu;
+        } else
+        // Caso contrário segue o jogo
+          game(lives, cli_word, used_letters);
+
+        free(cli_word);
+      }
     }
 
 	}
