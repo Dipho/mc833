@@ -17,7 +17,10 @@
 #define MAXDATASIZE 4096
 #define EXIT_COMMAND "exit\n"
 
+enum state { menu, simple_game, carrasco, multiplayer};
+
 void doit(int connfd, struct sockaddr_in clientaddr);
+char *get_word();
 
 int main (int argc, char **argv) {
    int    listenfd,
@@ -77,6 +80,8 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
    int n;
    socklen_t remoteaddr_len = sizeof(clientaddr);
 
+   enum state cur_state = menu;
+
    while ((n = read(connfd, recvline, MAXDATASIZE)) > 0) {
       recvline[n] = 0;
 
@@ -85,27 +90,57 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
          return;
       }
 
-      //MENU REQUEST
-      if (recvline[0] == '0'){
-        strcpy(sendline, "MENU");
+      //Esta no Menu
+      if (cur_state == menu){
+
+        //SIMPLE GAME REQUEST
+        if (recvline[0] == '1'){
+          strcpy(sendline, "SIMPLE_GAME");
+        }
+        //CARRASCO REQUEST
+        else if (recvline[0] == '2'){
+          strcpy(sendline, "CARRASCO");
+        }
+        //MULTIPLAYER REQUEST
+        else if (recvline[0] == '3'){
+          strcpy(sendline, "MULTIPLAYER");
+        }
+        else {
+          strcpy(sendline, "INVALID");
+        }
       }
-      //SIMPLE GAME REQUEST
-      else if (recvline[0] == '1'){
-        strcpy(sendline, "SIMPLE_GAME");
-      }
-      //CARRASCO REQUEST
-      else if (recvline[0] == '2'){
-        strcpy(sendline, "CARRASCO");
-      }
-      //MULTIPLAYER REQUEST
-      else if (recvline[0] == '3'){
-        strcpy(sendline, "MULTIPLAYER");
-      }
-      else {
-        strcpy(sendline, "INVALID");
-      }
+
       printf("Linha: %s. Fim da Linha.\n", sendline);
+      char* word = get_word();
+      printf("Palavra: %s\n", word);
       write(connfd, sendline, strlen(sendline));
 
    }
+}
+
+char *get_word(){
+  srand(time(NULL));
+  int line_number = ( rand() % 10275 );
+  printf("Num: %d\n", line_number);
+  FILE *file = fopen("dicionario.txt", "r");
+  int count = 0;
+  if ( file != NULL ){
+    char line[64];
+    while (fgets(line, sizeof line, file) != NULL){
+        if (count == line_number){
+          char* word = malloc(strlen(line));
+          strcpy(word, line);
+          fclose(file);
+          return word;
+        }
+        else{
+          count++;
+        }
+    }
+    fclose(file);
+    return NULL;
+  }
+  else{
+    return NULL;
+  }
 }
