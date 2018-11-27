@@ -15,9 +15,17 @@
 #include "basic.h"
 #include "socket_helper.h"
 
+#include <ncurses.h>
+
 #define MAXLINE 4096
 #define EXIT_COMMAND "exit\n"
 
+void init_scr();
+void game_menu();
+void simple_game();
+void game (int lives, char *word, char *exclude);
+void print_letters(char *exclude);
+void print_spaces(int n);
 void str_cli(FILE *fp, int sockfd);
 
 int main(int argc, char **argv) {
@@ -44,7 +52,8 @@ int main(int argc, char **argv) {
 
    Connect(sockfd, (struct sockaddr *) &servaddr, sizeof(servaddr));
 
-   // doit(sockfd);
+   init_scr();
+   game_menu();
    str_cli(stdin, sockfd);
 
    Close(sockfd);
@@ -52,10 +61,136 @@ int main(int argc, char **argv) {
    exit(0);
 }
 
+void init_scr(){
+  int maxX;
+  int maxY;
+  int spaces;
+
+  char titulo[5][107];
+  strcpy(titulo[0], "*******  *******  *******  *******      *****      ***        *******  *******  *****    *******    ***  \n");
+  strcpy(titulo[1], "   *     *     *  *        *     *      *    *    *   *       *        *     *  *    *   *         *   * \n");
+  strcpy(titulo[2], "   *     *     *  *    **  *     *      *     *  * *** *      *****    *     *  *****    *        * *** *\n");
+  strcpy(titulo[3], "*  *     *     *  *     *  *     *      *    *   *     *      *        *     *  *    *   *        *     *\n");
+  strcpy(titulo[4], " **      *******  *******  *******      *****    *     *      *        *******  *     *  *******  *     *\n");
+
+	initscr();			/* Start curses mode 		*/
+  getmaxyx(stdscr, maxY, maxX);
+  endwin();
+
+  for (int i=0; i<maxX; i++){
+    printf("=");
+  }
+  printf("\n");
+  if (maxX>=105){
+    spaces = (maxX-105)/2 - 1;
+
+    print_spaces(spaces);
+    printf("%s",titulo[0]);
+
+    print_spaces(spaces);
+    printf("%s",titulo[1]);
+
+    print_spaces(spaces);
+    printf("%s",titulo[2]);
+
+    print_spaces(spaces);
+    printf("%s",titulo[3]);
+
+    print_spaces(spaces);
+    printf("%s",titulo[4]);
+
+    for (int i=0; i<maxX; i++){
+      printf("=");
+    }
+    printf("\n");
+  }
+  else {
+    spaces = (maxX-13)/2 - 1;
+
+    print_spaces(spaces);
+    printf("JOGO DA FORCA\n");
+    for (int i=0; i<maxX; i++){
+      mvaddch(2,i,'=');
+    }
+
+    for (int i=0; i<maxX; i++){
+      printf("=");
+    }
+    printf("\n");
+  }
+
+	return;
+}
+
+void game_menu(){
+  printf("\nBem vindo ao Jogo da Forca!\n");
+  printf("-------\n");
+  printf("\n");
+  printf("1) Iniciar partida simples.\n");
+  printf("2) Ser Carrasco ao iniciar partida.\n");
+  printf("3) Jogar no modo multiplayer;\n");
+  printf("\n");
+
+  return;
+}
+
+void simple_game(){
+  printf("\nVocê começou uma partida simples!\n");
+  printf("-------\n");
+
+  return;
+}
+
+void game (int lives, char *word, char *exclude){
+  printf("\n");
+  printf("Vidas: %d\n", lives);
+  printf("\n");
+  printf("Palavra: %s\n", word);
+  printf("\n");
+  print_letters(exclude);
+  return;
+}
+
+void print_letters(char *exclude){
+  int e_i = 0;
+  int abc_i = 0;
+
+  char abc[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+  int abc_len = 27;
+
+  printf("+-----------------------------------+\n");
+
+  while (abc_i < abc_len){
+    if ((abc_i)%9 == 0){
+      printf("|");
+    }
+    if (abc[abc_i] != exclude[e_i]){
+      printf(" %c ", abc[abc_i]);
+    } else{
+      printf("   ");
+      e_i++;
+    }
+    printf("|");
+    if ((abc_i + 1)%9 == 0){
+      printf("\n");
+    }
+    abc_i++;
+  }
+  printf("+-----------------------------------+\n");
+
+  return;
+}
+void print_spaces(int n){
+  for (int i=0; i<n; i++){
+    printf(" ");
+  }
+
+  return;
+}
 void str_cli(FILE *fp, int sockfd) {
 	int			maxfdp1, send = 0, n;
 	fd_set		rset;
-	char		sendline[MAXLINE], recvline[MAXLINE];
+	char		sendline[MAXLINE], recvline[MAXLINE] = "MENU";
 
   //Set é zerado
 	FD_ZERO(&rset);
@@ -80,9 +215,10 @@ void str_cli(FILE *fp, int sockfd) {
 			if ((n = read(sockfd, recvline, MAXLINE)) == 0)
   				perror("str_cli: server terminated prematurely");
       recvline[n] = 0;
-      fputs(recvline, stdout);
+
       send = 0;
 		}
+
 
     //ENTRADA PADRÃO
 		if ((FD_ISSET(fileno(fp), &rset)) && (send == 0)) {
@@ -94,5 +230,21 @@ void str_cli(FILE *fp, int sockfd) {
   			write(sockfd, sendline, strlen(sendline));
       }
 		}
+
+    if (!strcmp(recvline, "MENU")){
+      init_scr();
+      game_menu();
+    }
+    else if (!strcmp(recvline, "SIMPLE_GAME")){
+      simple_game();
+      game(6, "_ _ _ _ _ _", "AGMPTVWXYZ");
+    }
+    else if (!strcmp(recvline, "CARRASCO")){
+      printf("\nCarrasco a ser implementado\n");
+    }
+    else if (!strcmp(recvline, "MULTIPLAYER")){
+      printf("\nMultiplayer a ser implementado\n");
+    }
+
 	}
 }

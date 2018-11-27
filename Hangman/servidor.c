@@ -72,6 +72,7 @@ int main (int argc, char **argv) {
 
 void doit(int connfd, struct sockaddr_in clientaddr) {
    char recvline[MAXDATASIZE + 1];
+   char sendline[MAXDATASIZE + 1];
 
    int n;
    socklen_t remoteaddr_len = sizeof(clientaddr);
@@ -84,8 +85,27 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
          return;
       }
 
-      printf("Linha: %s. Fim da Linha.\n", recvline);
-      write(connfd, recvline, strlen(recvline));
+      //MENU REQUEST
+      if (recvline[0] == '0'){
+        strcpy(sendline, "MENU");
+      }
+      //SIMPLE GAME REQUEST
+      else if (recvline[0] == '1'){
+        strcpy(sendline, "SIMPLE_GAME");
+      }
+      //CARRASCO REQUEST
+      else if (recvline[0] == '2'){
+        strcpy(sendline, "CARRASCO");
+      }
+      //MULTIPLAYER REQUEST
+      else if (recvline[0] == '3'){
+        strcpy(sendline, "MULTIPLAYER");
+      }
+      else {
+        strcpy(sendline, "INVALID");
+      }
+      printf("Linha: %s. Fim da Linha.\n", sendline);
+      write(connfd, sendline, strlen(sendline));
 
    }
 }
