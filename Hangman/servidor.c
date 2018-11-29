@@ -21,6 +21,7 @@ enum state { menu, simple_game, carrasco, multiplayer};
 
 void doit(int connfd, struct sockaddr_in clientaddr);
 char *get_word();
+int update_used_letters (char new_letter, char *used_letters);
 
 int main (int argc, char **argv) {
    int    listenfd,
@@ -81,7 +82,8 @@ array _ _ _ _ ___
       | | | |  |---- String com a Palavra Oculta: palavra com as devidas letras
       | | | |         escondidas.
       | | | |---- Caractere que indica se o cliente acertou o chute (T: acertou,
-      | | |        F: errou, S: acertou a palavra).
+      | | |        F: errou, S: acertou a palavra, R: caracter inválido e
+      | | |          M: caracter repetido).
       | | |---- Caractere escolhido pelo usuário.
       | |---- Número de vidas do cliente.
       |---- Modo de Jogo atual.
@@ -96,6 +98,7 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
    enum state cur_state = menu;
 
    char *word, *hide_word;
+   char used_letters[26] = " ";
    int word_len;
 
    char client_lives[12];
@@ -130,7 +133,7 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
           // Cria a "Palavra Oculta" para o cliente
           word_len = strlen(word) - 1;
           hide_word = malloc (word_len);
-          printf("L: %d\n", word_len);
+
           for (i=0; i < word_len; i++){
               hide_word[i] = '_';
           }
@@ -152,6 +155,13 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
         else if (recvline[0] == '3'){
           strcpy(sendline, "MULTIPLAYER");
         }
+        // EXIT REQUEST
+        else if (recvline[0] == '4'){
+          strcpy(sendline, "EXIT");
+          write(connfd, sendline, strlen(sendline));
+          sleep(1);
+          return;
+        }
         else {
           strcpy(sendline, "INVALID");
         }
@@ -160,39 +170,62 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
 
       //========================== SIMPLE GAME =================================
       else if (cur_state == simple_game){
-
         //Verifica se é um pedido de saída
-        if (!strcmp(recvline, "exit")){
+        if (!strcmp(recvline, "exit\n")){
           cur_state = menu;
-        }
-        else{
-          // Obtém o chute do cliente
-          guess[0] = recvline[0];
-          guess[1] = 0;
-          hit = "F";
+          strcpy(sendline, "exit");
 
-          //Procura a letra palpite na palavra, atualizando a palavra obscura
-          for (i=0; i<word_len; i++){
-            if (word[i] == guess[0]){
-              n_hit++;
-              hit = "T";                  // Indica o acerto
-              hide_word[i] = guess[0];    // Atualiza a palavra obscura
-            }
+        } else {
+
+          hit = "F";
+          // Obtém o chute do cliente
+          // Caso seja letra minúscula é transformado
+          if ((recvline[0] >= 'a') && (recvline[0] <= 'z'))
+            guess[0] = recvline[0] - 32;
+          else if ((recvline[0] >= 'A') && (recvline[0] <= 'Z'))
+            guess[0] = recvline[0];
+          //  No último caso o caracter é inválido
+          else {
+            guess[0] = '0';
+            hit = "E";
           }
-          // Caso não tenha acertado a letra
-          if (hit[0] == 'F') {
-            int_lives--;                            // Atualiza a vida
-            sprintf(client_lives, "%d", int_lives); // Transfere para char
-            if (int_lives == 0){  // Caso chegue a zero o jogo será finalizado
-              cur_state = menu;
+          guess[1] = 0;
+
+          if (hit[0] == 'F'){
+
+            if (used_letters[0] == ' '){
+              used_letters[0] = guess[0];
             }
-          }
-          // Verifica se todos caracteres foram acertados
-          if (n_hit == word_len){
-            hit = "S";
+            // Caso o caracter tenha sido utilizado retorna a flag R
+            if (!update_used_letters(guess[0], used_letters))
+                hit = "R";
+            else {
+              //Procura a letra palpite na palavra, atualizando a palavra obscura
+              for (i=0; i<word_len; i++){
+                if (word[i] == guess[0]){
+                  n_hit++;
+                  hit = "T";                  // Indica o acerto
+                  hide_word[i] = guess[0];    // Atualiza a palavra obscura
+                }
+              }
+              // Caso não tenha acertado a letra
+              if (hit[0] == 'F') {
+                int_lives--;                            // Atualiza a vida
+                sprintf(client_lives, "%d", int_lives); // Transfere para char
+                if (int_lives == 0){  // Caso chegue a zero o jogo será finalizado
+                  cur_state = menu;
+                }
+              }
+              // Verifica se todos caracteres foram acertados
+              if (n_hit == word_len){
+                hit = "S";
+                cur_state = menu;
+              }
+            }
           }
 
           // Envia informações ao cliente
+          // Tais variáveis são strings, pois strcat aceita apenas strings
           strcpy(sendline, "1");          // Modo de jogo
           strcat(sendline, client_lives); // Vida do cliente
           strcat(sendline, guess);        // Campo de chute
@@ -201,6 +234,11 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
         }
       }
 
+      //========================== MULTIPLAYER =================================
+      else if (cur_state == multiplayer){
+
+      }
+      // printf("Palavra: %s\n", word);
       printf("Linha: %s. Fim da Linha.\n", sendline);
       write(connfd, sendline, strlen(sendline));
    }
@@ -237,4 +275,31 @@ char *get_word(){
   else{
     return NULL;
   }
+}
+
+// Atualiza o array de caracteres utilizados e retorna 0 caso o caracter já
+//tenha sido usado
+int update_used_letters (char new_letter, char *used_letters){
+
+  char aux_letters[26];
+  strcpy(aux_letters, used_letters);
+
+  int i;
+  for (i = 0; i<strlen(aux_letters); i++){
+    if (aux_letters[i] == new_letter){
+      return 0;
+    }
+    else if (aux_letters[i] > new_letter){
+      used_letters[i] = new_letter;
+      for (int j = i; j<strlen(aux_letters); j++){
+        used_letters[j+1] = aux_letters[j];
+      }
+
+      return 1;
+    }
+  }
+  used_letters[i+1] = used_letters[i];
+  used_letters[i] = new_letter;
+
+  return 1;
 }

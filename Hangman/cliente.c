@@ -19,6 +19,7 @@
 
 #define MAXLINE 4096
 #define EXIT_COMMAND "exit\n"
+#define clear_scr() system("clear");
 
 enum state { menu, simple_game, carrasco, multiplayer};
 
@@ -66,7 +67,6 @@ int main(int argc, char **argv) {
 // Imprime a tela inicial do jogo
 void init_scr(){
   int maxX;
-  int maxY;
   int spaces;
 
   char titulo[5][107];
@@ -76,8 +76,11 @@ void init_scr(){
   strcpy(titulo[3], "*  *     *     *  *     *  *     *      *    *   *     *      *        *     *  *    *   *        *     *\n");
   strcpy(titulo[4], " **      *******  *******  *******      *****    *     *      *        *******  *     *  *******  *     *\n");
 
-	initscr();			/* Start curses mode 		*/
-  getmaxyx(stdscr, maxY, maxX);
+  clear_scr();
+
+  // Utiliza curses para obter o tamanho do terminal
+	initscr();
+  getmaxyx(stdscr, maxX, maxX);
   endwin();
 
   for (int i=0; i<maxX; i++){
@@ -132,7 +135,8 @@ void game_menu(){
   printf("\n");
   printf("1) Iniciar partida simples.\n");
   printf("2) Ser Carrasco ao iniciar partida.\n");
-  printf("3) Jogar no modo multiplayer;\n");
+  printf("3) Jogar no modo multiplayer.\n");
+  printf("4) Sair do jogo =C\n");
   printf("\n");
 
   return;
@@ -266,7 +270,6 @@ void str_cli(FILE *fp, int sockfd) {
 
     //ENTRADA PADRÃO
 		if ((FD_ISSET(fileno(fp), &rset)) && (send == 0)) {
-      //printf("2\n");
 			if (fgets(sendline, MAXLINE, fp) == NULL)
 				return;
       else{
@@ -297,53 +300,74 @@ void str_cli(FILE *fp, int sockfd) {
       else if (!strcmp(recvline, "MULTIPLAYER")){
         printf("\nMultiplayer a ser implementado\n");
       }
+      else if (!strcmp(recvline, "EXIT")){
+        clear_scr();
+        printf("Até logo!\n");
+        return;
+      }
     }
 
     // Modo de Simple Game
     if (cur_state == simple_game){
 
-      // Atualiza a vida local
-      lives = recvline[1] - '0';
-      if (lives == 0){
-        printf("\n\nVocê perdeu! =(\n");
-        strcpy(used_letters, " ");
+      if (!strcmp(recvline, "exit")){
         cur_state = menu;
-      }
-      else{
-        // Verifica se é a primeira chamada
-        if (recvline[3] != '0'){
-          // Verifica acertos
-          if (recvline[3] == 'T')
-            printf("\n\nBelo chute!\n");
-          else if (recvline[3] == 'F')
-            printf("\n\nErrouu!\n");
+        printf("\nVocês desistiu da partida.\n");
+        printf("\nPressione qualquer tecla para voltar ao menu\n");
+      }else{
 
-          // Atualiza as letras utilizadas
-          if (used_letters[0] == ' '){
-            used_letters[0] = recvline[2];
-          } else {
-            update_used_letters(recvline[2], used_letters);
-          }
-        }
-
-        // Atualiza a palavra local do cliente
-        cli_word = malloc (strlen(recvline)-4);
-        j=0;
-        for (int i=4; i<strlen(recvline); i++){
-          cli_word[j++]=recvline[i];
-        }
-
-        // Em caso de vitória o jogo é encerrado
-        if (recvline[3] == 'S'){
-          printf("\n\nParabéns, você acertou!\n");
-          printf("\nA palavra era: %s\n", cli_word);
+        // Atualiza a vida local
+        lives = recvline[1] - '0';
+        if (lives == 0){
+          printf("\n\nVocê perdeu! =(\n");
           printf("\nPressione qualquer tecla para voltar ao menu\n");
+          strcpy(used_letters, " ");
           cur_state = menu;
-        } else
-        // Caso contrário segue o jogo
-          game(lives, cli_word, used_letters);
+        }
+        else{
+          // Verifica se é a primeira chamada
+          if ((recvline[3] != '0') && (recvline[3] != 'E')){
 
-        free(cli_word);
+            // Atualiza as letras utilizadas
+            if (used_letters[0] == ' '){
+              used_letters[0] = recvline[2];
+            } else {
+              update_used_letters(recvline[2], used_letters);
+            }
+          }
+
+          // Atualiza a palavra local do cliente
+          cli_word = malloc (strlen(recvline)-4);
+          j=0;
+          for (int i=4; i<strlen(recvline); i++){
+            cli_word[j++]=recvline[i];
+          }
+
+          // Em caso de vitória o jogo é encerrado
+          if (recvline[3] == 'S'){
+            printf("\n\nParabéns, você acertou!\n");
+            printf("\nA palavra era: %s\n", cli_word);
+            printf("\nPressione qualquer tecla para voltar ao menu\n");
+            strcpy(used_letters, " ");
+            cur_state = menu;
+          } else {
+          // Caso contrário segue o jogo
+            init_scr();
+            printf("MODO DE JOGO SIMPLES\n\n");
+            // Verifica acertos
+            if (recvline[3] == 'T')
+              printf("\nBelo chute!\n");
+            else if (recvline[3] == 'F')
+              printf("\nErrouu!\n");
+            else if (recvline[3] == 'R')
+              printf("\nA letra '%c' já foi utilizada!\n", recvline[2]);
+            else if (recvline[3] == 'E')
+              printf("\nCaractere inválido inserido\n");
+            game(lives, cli_word, used_letters);
+          }
+
+          free(cli_word);
+        }
       }
     }
 
