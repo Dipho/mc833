@@ -119,7 +119,7 @@ void doit(int connfd, struct sockaddr_in clientaddr) {
       //============================= MENU ====================================
       if (cur_state == menu){
         n_hit = 0;
-
+        used_letters[0] = '\0';
         // Request para Simple Game
         if (recvline[0] == '1'){
 

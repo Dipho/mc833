@@ -25,7 +25,7 @@ enum state { menu, simple_game, carrasco, multiplayer};
 
 void init_scr();
 void game_menu();
-void game (int lives, char *word, char *exclude);
+void game(int lives, char *word, char *exclude);
 void print_letters(char *exclude);
 void print_spaces(int n);
 void update_used_letters (char new_letter, char *used_letters);
@@ -143,7 +143,7 @@ void game_menu(){
 }
 
 // Imprime o core das partidas
-void game (int lives, char *word, char *exclude){
+void game(int lives, char *word, char *exclude){
   printf("----------------------------------------------------------------------\n");
   printf("Vidas: %d\n", lives);
   printf("\n");
@@ -287,6 +287,7 @@ void str_cli(FILE *fp, int sockfd) {
     ================================================================================*/
     // Modo de Menu
     if (cur_state == menu){
+      used_letters[0] = '\0';
       init_scr();
       game_menu();
 
@@ -321,7 +322,7 @@ void str_cli(FILE *fp, int sockfd) {
         if (lives == 0){
           printf("\n\nVocê perdeu! =(\n");
           printf("\nPressione qualquer tecla para voltar ao menu\n");
-          strcpy(used_letters, " ");
+          //strcpy(used_letters, "\0");
           cur_state = menu;
         }
         else{
