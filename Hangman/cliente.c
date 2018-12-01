@@ -287,7 +287,6 @@ void str_cli(FILE *fp, int sockfd) {
     ================================================================================*/
     // Modo de Menu
     if (cur_state == menu){
-      used_letters[0] = '\0';
       init_scr();
       game_menu();
 
@@ -315,6 +314,7 @@ void str_cli(FILE *fp, int sockfd) {
         cur_state = menu;
         printf("\nVocês desistiu da partida.\n");
         printf("\nPressione qualquer tecla para voltar ao menu\n");
+        used_letters[0] = '\0';
       }else{
 
         // Atualiza a vida local
@@ -322,7 +322,7 @@ void str_cli(FILE *fp, int sockfd) {
         if (lives == 0){
           printf("\n\nVocê perdeu! =(\n");
           printf("\nPressione qualquer tecla para voltar ao menu\n");
-          //strcpy(used_letters, "\0");
+          used_letters[0] = '\0';
           cur_state = menu;
         }
         else{
@@ -349,7 +349,7 @@ void str_cli(FILE *fp, int sockfd) {
             printf("\n\nParabéns, você acertou!\n");
             printf("\nA palavra era: %s\n", cli_word);
             printf("\nPressione qualquer tecla para voltar ao menu\n");
-            strcpy(used_letters, " ");
+            used_letters[0] = '\0';
             cur_state = menu;
           } else {
           // Caso contrário segue o jogo
